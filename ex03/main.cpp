@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 #include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 #include <iostream>
 
 int main(void) {
@@ -55,6 +56,29 @@ int main(void) {
     }
 
     std::cout << "\n### END OF TESTS ###\n" << std::endl;
+
+    std::cout << "\n### TEST 1: DIAMONDTRAP CONSTRUCTION ###\n" << std::endl;
+    {
+        // Kolejność powinna być: ClapTrap -> ScavTrap -> FragTrap -> DiamondTrap
+        // Ale ClapTrap tylko RAZ!
+        DiamondTrap monster("Monster");
+
+        std::cout << "\n--- Who Am I? ---" << std::endl;
+        monster.whoAmI(); 
+        // Powinno wypisać:
+        // I am DiamondTrap named: Monster
+        // My ClapTrap name is: Monster_clap_name
+
+        std::cout << "\n--- Stats Check ---" << std::endl;
+        // Atak ze ScavTrapa -> "ScavTrap Monster attacks..."
+        monster.attack("Victim"); 
+        
+        // Sprawdź w debuggerze lub wypisz gettery, czy:
+        // HP = 100 (od Frag)
+        // Energy = 50 (od Scav)
+        // Dmg = 30 (od Frag)
+        
+    } // Destruktory w odwrotnej kolejności
 
     return 0;
 }

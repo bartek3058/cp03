@@ -1,67 +1,68 @@
 #include "ClapTrap.hpp"
+#include <iostream>
 
 int main(void) {
-    std::cout << "\n### TEST 1: STWORZENIE I PODSTAWY ###\n" << std::endl;
+    std::cout << "\n### TEST 1: CREATION AND BASICS ###\n" << std::endl;
     {
         ClapTrap hero("Hero");
 
-        // Powinien mieć 10 HP i 10 Energii. Atak zabiera 1 Energię.
+        // Should have 10 HP and 10 Energy. Attack costs 1 Energy.
         hero.attack("Bandit"); 
         
-        // Otrzymuje obrażenia (np. 3). Powinien mieć 7 HP.
+        // Takes damage (e.g., 3). Should have 7 HP.
         hero.takeDamage(3); 
 
-        // Naprawia się o 2. Powinien mieć 9 HP i stracić 1 Energię.
+        // Repairs itself by 2. Should have 9 HP and lose 1 Energy.
         hero.beRepaired(2); 
     }
 
-    std::cout << "\n### TEST 2: WYCZERPANIE ENERGII ###\n" << std::endl;
+    std::cout << "\n### TEST 2: ENERGY EXHAUSTION ###\n" << std::endl;
     {
         ClapTrap spammer("Spammer");
 
-        // Spammer ma 10 energii. Zmuśmy go do 11 ataków.
-        // Ostatni atak powinien wyświetlić komunikat o braku energii.
+        // Spammer has 10 energy. Let's force it to attack 11 times.
+        // The last attack should display a 'no energy' message.
         for (int i = 0; i < 11; i++) {
             std::cout << "Attack attempt " << i + 1 << ": ";
             spammer.attack("TargetDummy");
         }
         
-        // Próba naprawy bez energii też powinna się nie udać
+        // Attempting to repair without energy should also fail
         std::cout << "Repair attempt without energy: ";
         spammer.beRepaired(5);
     }
 
-    std::cout << "\n### TEST 3: ŚMIERĆ I KOPIEM LEŻĄCEGO ###\n" << std::endl;
+    std::cout << "\n### TEST 3: DEATH MECHANICS ###\n" << std::endl;
     {
         ClapTrap victim("Victim");
 
-        // Zabieramy mu całe życie (i jeszcze trochę)
+        // Taking all HP (and then some)
         victim.takeDamage(15);
 
-        // Próba ataku martwym robotem (nie powinno się udać)
+        // Attack attempt by a dead robot (should fail)
         std::cout << "Attack attempt while dead: ";
         victim.attack("Ghost");
 
-        // Próba naprawy martwego robota (nie powinno się udać - trup się nie leczy)
+        // Repair attempt by a dead robot (should fail - dead can't heal)
         std::cout << "Repair attempt while dead: ";
         victim.beRepaired(10);
     }
 
-    std::cout << "\n### TEST 4: FORMA KANONICZNA (KOPIOWANIE) ###\n" << std::endl;
+    std::cout << "\n### TEST 4: CANONICAL FORM (COPYING) ###\n" << std::endl;
     {
         ClapTrap original("Original");
-        original.takeDamage(5); // Original ma teraz 5 HP
+        original.takeDamage(5); // Original now has 5 HP
 
-        // Kopiowanie - copy constructor
-        // clone powinien mieć też 5 HP (bo skopiował stan original)
+        // Copying - copy constructor
+        // Clone should also have 5 HP (because it copied original's state)
         ClapTrap clone(original); 
         
-        std::cout << "--- Klon atakuje ---" << std::endl;
-        clone.attack("Original"); // Sprawdzamy czy klon żyje i działa
+        std::cout << "--- Clone attacks ---" << std::endl;
+        clone.attack("Original"); // Check if clone is alive and functional
     } 
-    // Tutaj uruchomią się destruktory dla TEST 4 (najpierw clone, potem original)
+    // Destructors for TEST 4 will run here (first clone, then original)
 
-    std::cout << "\n### KONIEC TESTÓW ###\n" << std::endl;
+    std::cout << "\n### END OF TESTS ###\n" << std::endl;
 
     return 0;
 }
