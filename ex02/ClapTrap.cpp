@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap()
 {
-    std::cout << "Default Constructor called" << std::endl;
+    std::cout << "ClapTrap Default Constructor called" << std::endl;
     this->Name = "Default";
     this->HitPoints = 10;
     this->EnergyPoints = 10;
@@ -20,7 +20,7 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::ClapTrap(const ClapTrap &settings)
 {
-    std::cout<<"Copy constructor called"<<std::endl;
+    std::cout<<"ClapTrap Copy constructor called"<<std::endl;
     this->Name = settings.Name;
     this->HitPoints = settings.HitPoints;
     this->EnergyPoints = settings.EnergyPoints;
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(const ClapTrap &settings)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &settings)
 {
-    std::cout<<"Copy assignment operator called"<<std::endl;
+    std::cout<<"ClapTrap Copy assignment operator called"<<std::endl;
     if(this != &settings)
     {
         this->Name = settings.Name;
